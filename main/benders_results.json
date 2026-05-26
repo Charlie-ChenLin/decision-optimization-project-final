@@ -1,0 +1,40 @@
+[
+  {
+    "scale": "小规模",
+    "nz": 3,
+    "np": 12,
+    "ns": 5,
+    "direct_obj": 1076525.3669133775,
+    "direct_time": 0.04390525817871094,
+    "direct_gap": 4.436949779722132e-08,
+    "direct_n_vars": 1270,
+    "direct_n_constrs": 1303,
+    "benders_obj": 1076648.0270037232,
+    "benders_time": 0.6357598304748535,
+    "benders_iterations": 21,
+    "benders_gap": 0.0001143119615788752,
+    "benders_cuts": 93,
+    "benders_master_vars": 185,
+    "benders_master_constrs": 305,
+    "relative_obj_diff": 0.00011394073387917326
+  },
+  {
+    "scale": "中规模",
+    "nz": 3,
+    "np": 24,
+    "ns": 20,
+    "direct_obj": 1855133.0727573487,
+    "direct_time": 0.34520411491394043,
+    "direct_gap": 0.006907493121181534,
+    "direct_n_vars": 9080,
+    "direct_n_constrs": 9149,
+    "benders_obj": 1855632.1739115417,
+    "benders_time": 3.8750641345977783,
+    "benders_iterations": 23,
+    "benders_gap": 0.0005468536674823661,
+    "benders_cuts": 395,
+    "benders_master_vars": 380,
+    "benders_master_constrs": 811,
+    "relative_obj_diff": 0.00026903792591612737
+  }
+]

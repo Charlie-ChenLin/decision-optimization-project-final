@@ -1,0 +1,41 @@
+[
+  {
+    "scale": "小规模",
+    "nz": 3,
+    "np": 12,
+    "ns": 5,
+    "gurobi_obj": 1076525.3669133775,
+    "gurobi_time": 0.09047722816467285,
+    "benders_obj": 1076524.9673230199,
+    "benders_time": 1.1079182624816895,
+    "benders_iter": 21,
+    "heuristic_obj": 1076525.3669133775,
+    "heuristic_time": 0.05123138427734375
+  },
+  {
+    "scale": "中规模",
+    "nz": 3,
+    "np": 24,
+    "ns": 20,
+    "gurobi_obj": 1855133.0727573487,
+    "gurobi_time": 0.5549674034118652,
+    "benders_obj": 1854617.969273266,
+    "benders_time": 5.5590739250183105,
+    "benders_iter": 23,
+    "heuristic_obj": 1855133.0727573456,
+    "heuristic_time": 0.22670698165893555
+  },
+  {
+    "scale": "大规模",
+    "nz": 5,
+    "np": 36,
+    "ns": 30,
+    "gurobi_obj": 3392050.7223578207,
+    "gurobi_time": 4.569119215011597,
+    "benders_obj": 3390596.8399789403,
+    "benders_time": 207.54308247566223,
+    "benders_iter": 95,
+    "heuristic_obj": 3414557.4294960084,
+    "heuristic_time": 1.5301623344421387
+  }
+]

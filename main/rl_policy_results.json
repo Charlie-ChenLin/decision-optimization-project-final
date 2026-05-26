@@ -1,0 +1,279 @@
+[
+  {
+    "scale": "小规模",
+    "zones": 3,
+    "periods": 12,
+    "scenes": 5,
+    "gurobi_obj": 1076525.3669133775,
+    "gurobi_time": 0.07722902297973633,
+    "rl_policy_obj": 1088710.0705738135,
+    "rl_policy_time": 0.34225010871887207,
+    "relative_gap_to_gurobi": 0.011318547648693182,
+    "details": {
+      "best_episode": "initial_mean_policy",
+      "episodes": 9,
+      "q_table": {
+        "high_invest": -1e+18,
+        "low_invest": -1e+18
+      },
+      "history": [
+        {
+          "episode": "initial_mean_policy",
+          "obj": 1088710.0705738135,
+          "eval_time": 0.007999897003173828,
+          "status": 2,
+          "state": "initial",
+          "accepted": true
+        },
+        {
+          "episode": 0,
+          "obj": Infinity,
+          "eval_time": 0.0009999275207519531,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 1,
+          "obj": Infinity,
+          "eval_time": 0.002000093460083008,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 2,
+          "obj": Infinity,
+          "eval_time": 0.0010001659393310547,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 3,
+          "obj": Infinity,
+          "eval_time": 0.002000093460083008,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 4,
+          "obj": Infinity,
+          "eval_time": 0.0,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 5,
+          "obj": Infinity,
+          "eval_time": 0.0019998550415039062,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 6,
+          "obj": Infinity,
+          "eval_time": 0.002000093460083008,
+          "status": 3,
+          "state": "low_invest",
+          "accepted": false
+        },
+        {
+          "episode": 7,
+          "obj": Infinity,
+          "eval_time": 0.0019998550415039062,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        }
+      ]
+    }
+  },
+  {
+    "scale": "中规模",
+    "zones": 3,
+    "periods": 24,
+    "scenes": 20,
+    "gurobi_obj": 1855133.0727573487,
+    "gurobi_time": 0.5954098701477051,
+    "rl_policy_obj": 1884391.3643437745,
+    "rl_policy_time": 2.2108213901519775,
+    "relative_gap_to_gurobi": 0.01577153252027265,
+    "details": {
+      "best_episode": "initial_mean_policy",
+      "episodes": 9,
+      "q_table": {
+        "high_invest": -1e+18
+      },
+      "history": [
+        {
+          "episode": "initial_mean_policy",
+          "obj": 1884391.3643437745,
+          "eval_time": 0.032000064849853516,
+          "status": 2,
+          "state": "initial",
+          "accepted": true
+        },
+        {
+          "episode": 0,
+          "obj": Infinity,
+          "eval_time": 0.006000041961669922,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 1,
+          "obj": Infinity,
+          "eval_time": 0.00599980354309082,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 2,
+          "obj": Infinity,
+          "eval_time": 0.00800013542175293,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 3,
+          "obj": Infinity,
+          "eval_time": 0.005000114440917969,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 4,
+          "obj": Infinity,
+          "eval_time": 0.00599980354309082,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 5,
+          "obj": Infinity,
+          "eval_time": 0.004999876022338867,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 6,
+          "obj": Infinity,
+          "eval_time": 0.004999876022338867,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 7,
+          "obj": Infinity,
+          "eval_time": 0.006000041961669922,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        }
+      ]
+    }
+  },
+  {
+    "scale": "大规模",
+    "zones": 5,
+    "periods": 36,
+    "scenes": 30,
+    "gurobi_obj": 3392050.7223578207,
+    "gurobi_time": 5.6304931640625,
+    "rl_policy_obj": 3461582.927194423,
+    "rl_policy_time": 9.342398405075073,
+    "relative_gap_to_gurobi": 0.020498574616912082,
+    "details": {
+      "best_episode": "initial_mean_policy",
+      "episodes": 9,
+      "q_table": {
+        "high_invest": -1e+18
+      },
+      "history": [
+        {
+          "episode": "initial_mean_policy",
+          "obj": 3461582.927194423,
+          "eval_time": 0.1919999122619629,
+          "status": 2,
+          "state": "initial",
+          "accepted": true
+        },
+        {
+          "episode": 0,
+          "obj": Infinity,
+          "eval_time": 0.023999929428100586,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 1,
+          "obj": Infinity,
+          "eval_time": 0.023999929428100586,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 2,
+          "obj": Infinity,
+          "eval_time": 0.023999929428100586,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 3,
+          "obj": Infinity,
+          "eval_time": 0.026000022888183594,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 4,
+          "obj": Infinity,
+          "eval_time": 0.0280001163482666,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 5,
+          "obj": Infinity,
+          "eval_time": 0.029000043869018555,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 6,
+          "obj": Infinity,
+          "eval_time": 0.029999971389770508,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        },
+        {
+          "episode": 7,
+          "obj": Infinity,
+          "eval_time": 0.026000022888183594,
+          "status": 3,
+          "state": "high_invest",
+          "accepted": false
+        }
+      ]
+    }
+  }
+]

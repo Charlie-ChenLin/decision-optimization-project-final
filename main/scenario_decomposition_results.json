@@ -1,0 +1,294 @@
+[
+  {
+    "scale": "小规模",
+    "zones": 3,
+    "periods": 12,
+    "scenes": 5,
+    "gurobi_obj": 1076525.3669133775,
+    "gurobi_time": 0.09743452072143555,
+    "scenario_decomposition_obj": 1082851.8074067028,
+    "scenario_decomposition_time": 0.4489731788635254,
+    "relative_gap_to_gurobi": 0.00587672217280347,
+    "details": {
+      "best_candidate_scenario": 2,
+      "scenario_records": [
+        {
+          "scenario": 0,
+          "single_obj": 1089943.5581280137,
+          "solve_time": 0.033986806869506836,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 1,
+          "single_obj": 1106185.0629855348,
+          "solve_time": 0.033933162689208984,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 2,
+          "single_obj": 1083844.96413985,
+          "solve_time": 0.028197526931762695,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 3,
+          "single_obj": 1056867.3932779199,
+          "solve_time": 0.03464460372924805,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 4,
+          "single_obj": 1044674.9444622637,
+          "solve_time": 0.037360429763793945,
+          "status": 2,
+          "accepted": true
+        }
+      ],
+      "eval_records": [
+        {
+          "candidate_scenario": 0,
+          "single_obj": 1089943.5581280137,
+          "eval_obj": 1089982.4658779385,
+          "eval_time": 0.009000062942504883,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 1,
+          "single_obj": 1106185.0629855348,
+          "eval_obj": 1085392.101019952,
+          "eval_time": 0.005000114440917969,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 2,
+          "single_obj": 1083844.96413985,
+          "eval_obj": 1082851.8074067028,
+          "eval_time": 0.00800013542175293,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 3,
+          "single_obj": 1056867.3932779199,
+          "eval_obj": 1086684.8147303208,
+          "eval_time": 0.009999990463256836,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 4,
+          "single_obj": 1044674.9444622637,
+          "eval_obj": 1088018.3374505443,
+          "eval_time": 0.006999969482421875,
+          "eval_status": 2
+        }
+      ]
+    }
+  },
+  {
+    "scale": "中规模",
+    "zones": 3,
+    "periods": 24,
+    "scenes": 20,
+    "gurobi_obj": 1855133.0727573487,
+    "gurobi_time": 0.7238895893096924,
+    "scenario_decomposition_obj": 1864644.4438676687,
+    "scenario_decomposition_time": 2.0424838066101074,
+    "relative_gap_to_gurobi": 0.0051270559778135005,
+    "details": {
+      "best_candidate_scenario": 5,
+      "scenario_records": [
+        {
+          "scenario": 0,
+          "single_obj": 1890280.8368570355,
+          "solve_time": 0.06391310691833496,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 1,
+          "single_obj": 1859371.9231395887,
+          "solve_time": 0.07614874839782715,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 2,
+          "single_obj": 1877423.9260841513,
+          "solve_time": 0.09467077255249023,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 3,
+          "single_obj": 1862028.2352437843,
+          "solve_time": 0.04656529426574707,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 4,
+          "single_obj": 1834429.6428711696,
+          "solve_time": 0.04770207405090332,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 5,
+          "single_obj": 1835840.421942436,
+          "solve_time": 0.06545543670654297,
+          "status": 2,
+          "accepted": true
+        }
+      ],
+      "eval_records": [
+        {
+          "candidate_scenario": 0,
+          "single_obj": 1890280.8368570355,
+          "eval_obj": 1867945.5150024549,
+          "eval_time": 0.03699994087219238,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 1,
+          "single_obj": 1859371.9231395887,
+          "eval_obj": 1865004.1290414573,
+          "eval_time": 0.031000137329101562,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 2,
+          "single_obj": 1877423.9260841513,
+          "eval_obj": 1865635.3424170506,
+          "eval_time": 0.029000043869018555,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 3,
+          "single_obj": 1862028.2352437843,
+          "eval_obj": 1871382.113451794,
+          "eval_time": 0.032000064849853516,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 4,
+          "single_obj": 1834429.6428711696,
+          "eval_obj": 1871046.2907894382,
+          "eval_time": 0.0280001163482666,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 5,
+          "single_obj": 1835840.421942436,
+          "eval_obj": 1864644.4438676687,
+          "eval_time": 0.026000022888183594,
+          "eval_status": 2
+        }
+      ]
+    }
+  },
+  {
+    "scale": "大规模",
+    "zones": 5,
+    "periods": 36,
+    "scenes": 30,
+    "gurobi_obj": 3392050.7223578207,
+    "gurobi_time": 5.83730149269104,
+    "scenario_decomposition_obj": 3413784.924233212,
+    "scenario_decomposition_time": 8.470519304275513,
+    "relative_gap_to_gurobi": 0.006407392947321239,
+    "details": {
+      "best_candidate_scenario": 5,
+      "scenario_records": [
+        {
+          "scenario": 0,
+          "single_obj": 3349836.529381105,
+          "solve_time": 0.25431108474731445,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 1,
+          "single_obj": 3405350.3543765075,
+          "solve_time": 0.29524946212768555,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 2,
+          "single_obj": 3382503.104778571,
+          "solve_time": 0.3005814552307129,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 3,
+          "single_obj": 3449225.9004070037,
+          "solve_time": 0.2943427562713623,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 4,
+          "single_obj": 3356619.157727301,
+          "solve_time": 0.24628877639770508,
+          "status": 2,
+          "accepted": true
+        },
+        {
+          "scenario": 5,
+          "single_obj": 3415861.845726576,
+          "solve_time": 0.2668750286102295,
+          "status": 2,
+          "accepted": true
+        }
+      ],
+      "eval_records": [
+        {
+          "candidate_scenario": 0,
+          "single_obj": 3349836.529381105,
+          "eval_obj": 3416230.463125564,
+          "eval_time": 0.17300009727478027,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 1,
+          "single_obj": 3405350.3543765075,
+          "eval_obj": 3423687.796309677,
+          "eval_time": 0.14999985694885254,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 2,
+          "single_obj": 3382503.104778571,
+          "eval_obj": 3431324.845396823,
+          "eval_time": 0.17199993133544922,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 3,
+          "single_obj": 3449225.9004070037,
+          "eval_obj": 3436831.4461234706,
+          "eval_time": 0.1490001678466797,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 4,
+          "single_obj": 3356619.157727301,
+          "eval_obj": 3416136.1332971347,
+          "eval_time": 0.15899991989135742,
+          "eval_status": 2
+        },
+        {
+          "candidate_scenario": 5,
+          "single_obj": 3415861.845726576,
+          "eval_obj": 3413784.924233212,
+          "eval_time": 0.16299986839294434,
+          "eval_status": 2
+        }
+      ]
+    }
+  }
+]

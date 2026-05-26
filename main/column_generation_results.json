@@ -1,0 +1,282 @@
+[
+  {
+    "scale": "小规模",
+    "zones": 3,
+    "periods": 12,
+    "scenes": 5,
+    "gurobi_obj": 1076525.3669133775,
+    "gurobi_time": 0.08291435241699219,
+    "column_generation_obj": 1076525.3669133778,
+    "column_generation_time": 0.3304595947265625,
+    "relative_gap_to_gurobi": 2.16279755972164e-16,
+    "details": {
+      "selected_scenes": [
+        4,
+        1,
+        3,
+        0,
+        2
+      ],
+      "iterations": 3,
+      "history": [
+        {
+          "iteration": 0,
+          "selected_scenes": [
+            4,
+            1
+          ],
+          "reduced_obj": 1075550.5788152167,
+          "reduced_time": 0.04188084602355957,
+          "eval_obj": 1078701.4979856692,
+          "eval_time": 0.006000041961669922,
+          "eval_status": 2
+        },
+        {
+          "iteration": 1,
+          "selected_scenes": [
+            4,
+            1,
+            3,
+            0
+          ],
+          "reduced_obj": 1074670.4477433353,
+          "reduced_time": 0.0660562515258789,
+          "eval_obj": 1077164.8945632023,
+          "eval_time": 0.006999969482421875,
+          "eval_status": 2
+        },
+        {
+          "iteration": 2,
+          "selected_scenes": [
+            4,
+            1,
+            3,
+            0,
+            2
+          ],
+          "reduced_obj": 1076525.3669133775,
+          "reduced_time": 0.07968354225158691,
+          "eval_obj": 1076525.3669133778,
+          "eval_time": 0.006999969482421875,
+          "eval_status": 2
+        }
+      ]
+    }
+  },
+  {
+    "scale": "中规模",
+    "zones": 3,
+    "periods": 24,
+    "scenes": 20,
+    "gurobi_obj": 1855133.0727573487,
+    "gurobi_time": 0.6502902507781982,
+    "column_generation_obj": 1855672.076964071,
+    "column_generation_time": 2.992877960205078,
+    "relative_gap_to_gurobi": 0.0002905474624099223,
+    "details": {
+      "selected_scenes": [
+        9,
+        18,
+        14,
+        19,
+        13,
+        0,
+        2,
+        7,
+        11,
+        15
+      ],
+      "iterations": 5,
+      "history": [
+        {
+          "iteration": 0,
+          "selected_scenes": [
+            9,
+            18
+          ],
+          "reduced_obj": 1859485.855192247,
+          "reduced_time": 0.08072304725646973,
+          "eval_obj": 1859045.0563196891,
+          "eval_time": 0.039999961853027344,
+          "eval_status": 2
+        },
+        {
+          "iteration": 1,
+          "selected_scenes": [
+            9,
+            18,
+            14,
+            19
+          ],
+          "reduced_obj": 1879189.2654075176,
+          "reduced_time": 0.13176369667053223,
+          "eval_obj": 1856475.541816038,
+          "eval_time": 0.03900003433227539,
+          "eval_status": 2
+        },
+        {
+          "iteration": 2,
+          "selected_scenes": [
+            9,
+            18,
+            14,
+            19,
+            13,
+            0
+          ],
+          "reduced_obj": 1881773.425937575,
+          "reduced_time": 0.1946556568145752,
+          "eval_obj": 1856059.776670854,
+          "eval_time": 0.039999961853027344,
+          "eval_status": 2
+        },
+        {
+          "iteration": 3,
+          "selected_scenes": [
+            9,
+            18,
+            14,
+            19,
+            13,
+            0,
+            2,
+            7
+          ],
+          "reduced_obj": 1879034.5555587295,
+          "reduced_time": 0.39392852783203125,
+          "eval_obj": 1855939.3812390268,
+          "eval_time": 0.04500007629394531,
+          "eval_status": 2
+        },
+        {
+          "iteration": 4,
+          "selected_scenes": [
+            9,
+            18,
+            14,
+            19,
+            13,
+            0,
+            2,
+            7,
+            11,
+            15
+          ],
+          "reduced_obj": 1873222.1672410448,
+          "reduced_time": 0.3916141986846924,
+          "eval_obj": 1855672.076964071,
+          "eval_time": 0.03800010681152344,
+          "eval_status": 2
+        }
+      ]
+    }
+  },
+  {
+    "scale": "大规模",
+    "zones": 5,
+    "periods": 36,
+    "scenes": 30,
+    "gurobi_obj": 3392050.7223578207,
+    "gurobi_time": 7.599348545074463,
+    "column_generation_obj": 3393428.6796560283,
+    "column_generation_time": 13.684576511383057,
+    "relative_gap_to_gurobi": 0.00040623133643760543,
+    "details": {
+      "selected_scenes": [
+        29,
+        15,
+        28,
+        7,
+        26,
+        25,
+        17,
+        10,
+        11,
+        1
+      ],
+      "iterations": 5,
+      "history": [
+        {
+          "iteration": 0,
+          "selected_scenes": [
+            29,
+            15
+          ],
+          "reduced_obj": 3469835.671722477,
+          "reduced_time": 0.4743943214416504,
+          "eval_obj": 3405285.5317008677,
+          "eval_time": 0.2560000419616699,
+          "eval_status": 2
+        },
+        {
+          "iteration": 1,
+          "selected_scenes": [
+            29,
+            15,
+            28,
+            7
+          ],
+          "reduced_obj": 3466087.4414039687,
+          "reduced_time": 0.6998915672302246,
+          "eval_obj": 3421797.815701064,
+          "eval_time": 0.1919999122619629,
+          "eval_status": 2
+        },
+        {
+          "iteration": 2,
+          "selected_scenes": [
+            29,
+            15,
+            28,
+            7,
+            26,
+            25
+          ],
+          "reduced_obj": 3452105.3538364735,
+          "reduced_time": 1.0624661445617676,
+          "eval_obj": 3419066.2751015048,
+          "eval_time": 0.2259998321533203,
+          "eval_status": 2
+        },
+        {
+          "iteration": 3,
+          "selected_scenes": [
+            29,
+            15,
+            28,
+            7,
+            26,
+            25,
+            17,
+            10
+          ],
+          "reduced_obj": 3418559.8854742595,
+          "reduced_time": 1.9977445602416992,
+          "eval_obj": 3394295.7639206625,
+          "eval_time": 0.18500018119812012,
+          "eval_status": 2
+        },
+        {
+          "iteration": 4,
+          "selected_scenes": [
+            29,
+            15,
+            28,
+            7,
+            26,
+            25,
+            17,
+            10,
+            11,
+            1
+          ],
+          "reduced_obj": 3420799.2288435255,
+          "reduced_time": 1.2540874481201172,
+          "eval_obj": 3393428.6796560283,
+          "eval_time": 0.20799994468688965,
+          "eval_status": 2
+        }
+      ]
+    }
+  }
+]
