@@ -58,7 +58,7 @@ class Instance:
 # ============================================================
 
 def generate_instance(n_zones: int, n_periods: int, n_scenes: int,
-                       seed: int = 42) -> Instance:
+                       seed: int = 42, cv: float = 0.15) -> Instance:
     """
     生成指定规模的随机规划实例。
     
@@ -67,6 +67,7 @@ def generate_instance(n_zones: int, n_periods: int, n_scenes: int,
         n_periods : 时段数 (建议 12/24/36，即1/2/3年)
         n_scenes  : 场景数 (建议 5/20/50)
         seed      : 随机种子 (默认42)
+        cv        : 需求变异系数 (默认0.15)
     
     返回:
         Instance 对象，包含全部数据和参数
@@ -105,8 +106,7 @@ def generate_instance(n_zones: int, n_periods: int, n_scenes: int,
             year_mult = 1.0 if t <= 12 else (1.0 + growth)
             mu_det[(z, t)] = base[z] * seasonal[month] * year_mult
     
-    # 对数正态分布场景采样（CV=0.15）
-    cv = 0.15
+    # 对数正态分布场景采样
     sigma_ln = np.sqrt(np.log(1 + cv**2))
     h = {}
     for z in Z:
@@ -119,6 +119,7 @@ def generate_instance(n_zones: int, n_periods: int, n_scenes: int,
     # 参数（统一缩放，与LaTeX一致）
     params = {
         'k': 0.20,
+        'cv': cv,
         'rho': 0.99,
         'p2': 75.0,       # EYC购买单价（万元/台）
         'v2': 50.0,       # DYC改造单价（万元/台）
@@ -208,10 +209,11 @@ def solve_direct(inst: Instance, time_limit: int = 300,
     dE = model.addVars(N, S, lb=0.0, name="dE")
     
     # ---- 目标函数 ----
-    C_inv = (1 - p['k']) * gp.quicksum(
+    C_inv_raw = gp.quicksum(
         p['rho']**(t-1) * gp.quicksum(
             p['p2'] * b2[z,t] + p['v2'] * y[z,t] + p['d_cost'] * a[z,t]
             for z in Z) for t in T)
+    C_inv = (1 - p['k']) * C_inv_raw
     
     C_op = gp.quicksum(
         p['rho']**(t-1) * gp.quicksum(
@@ -334,13 +336,33 @@ def solve_direct(inst: Instance, time_limit: int = 300,
         first_stage = {
             'b2': {(z,t): b2[z,t].X for z in Z for t in T},
             'y': {(z,t): y[z,t].X for z in Z for t in T},
-            'a': {(z,t): a[z,t].X for z in Z for t in T}
+            'a': {(z,t): a[z,t].X for z in Z for t in T},
+            'x2': {(z,t): x2[z,t].X for z in Z for t in T},
         }
+        expected_total_emissions = sum(E[n,s].X for n in N for s in S) / nS
+        expected_excess_emissions = sum(dE[n,s].X for n in N for s in S) / nS
+        eyc_purchase = sum(b2[z,t].X for z in Z for t in T)
+        eyc_conversion = sum(y[z,t].X for z in Z for t in T)
+        terminal_eyc_stock = sum(x2[z,max(T)].X for z in Z)
+        raw_inv_value = C_inv_raw.getValue()
         return model.ObjVal, solve_time, {
             'status': model.status,
             'mip_gap': model.MIPGap if model.SolCount > 0 else None,
             'n_vars': n_vars,
             'n_constrs': n_constrs,
+            'cost_breakdown': {
+                'investment_after_subsidy': C_inv.getValue(),
+                'operation': C_op.getValue(),
+                'carbon': C_carbon.getValue(),
+                'investment_before_subsidy': raw_inv_value,
+            },
+            'expected_total_emissions': expected_total_emissions,
+            'expected_excess_emissions': expected_excess_emissions,
+            'government_subsidy': p['k'] * raw_inv_value,
+            'eyc_purchase': eyc_purchase,
+            'eyc_conversion': eyc_conversion,
+            'eyc_total_investment': eyc_purchase + eyc_conversion,
+            'terminal_eyc_stock': terminal_eyc_stock,
         }, first_stage
     else:
         return float('inf'), solve_time, {
