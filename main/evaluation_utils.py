@@ -79,7 +79,22 @@ def solve_fixed_first_stage(inst: Instance, fs: dict, time_limit: int = 300):
         for t in T
     )
 
+    dyc_op_cost = p["o1"] + p.get("dyc_operation_penalty", 0.0)
+    eyc_op_cost = p["o2"] - p.get("eyc_operation_subsidy", 0.0)
+
     C_op = gp.quicksum(
+        p["rho"] ** (t - 1)
+        * gp.quicksum(
+            dyc_op_cost * w1[z, t, s]
+            + eyc_op_cost * w2[z, t, s]
+            + gp.quicksum(p["u"][(z, zp)] * move[z, zp, t, s] for zp in Z)
+            for z in Z
+        )
+        for t in T
+        for s in S
+    ) / nS
+
+    C_op_before_policy = gp.quicksum(
         p["rho"] ** (t - 1)
         * gp.quicksum(
             p["o1"] * w1[z, t, s]
@@ -87,6 +102,19 @@ def solve_fixed_first_stage(inst: Instance, fs: dict, time_limit: int = 300):
             + gp.quicksum(p["u"][(z, zp)] * move[z, zp, t, s] for zp in Z)
             for z in Z
         )
+        for t in T
+        for s in S
+    ) / nS
+
+    C_inv_raw = gp.quicksum(
+        p["rho"] ** (t - 1)
+        * gp.quicksum(p["p2"] * b2[z, t] + p["v2"] * y[z, t] + p["d_cost"] * a[z, t] for z in Z)
+        for t in T
+    )
+
+    C_eyc_operation_subsidy = gp.quicksum(
+        p["rho"] ** (t - 1)
+        * gp.quicksum(p.get("eyc_operation_subsidy", 0.0) * w2[z, t, s] for z in Z)
         for t in T
         for s in S
     ) / nS
@@ -167,5 +195,35 @@ def solve_fixed_first_stage(inst: Instance, fs: dict, time_limit: int = 300):
     model.optimize()
 
     if model.status in (GRB.OPTIMAL, GRB.TIME_LIMIT):
-        return model.ObjVal, model.Runtime, {"status": model.status, "mip_gap": model.MIPGap if model.SolCount > 0 else None}
+        expected_dyc_work = sum(w1[z, t, s].X for z in Z for t in T for s in S) / nS
+        expected_eyc_work = sum(w2[z, t, s].X for z in Z for t in T for s in S) / nS
+        expected_total_work = expected_dyc_work + expected_eyc_work
+        expected_total_emissions = sum(E[n, s].X for n in N for s in S) / nS
+        expected_excess_emissions = sum(dE[n, s].X for n in N for s in S) / nS
+        raw_inv_value = C_inv_raw.getValue()
+        operation_subsidy_value = C_eyc_operation_subsidy.getValue()
+        return model.ObjVal, model.Runtime, {
+            "status": model.status,
+            "mip_gap": model.MIPGap if model.SolCount > 0 else None,
+            "cost_breakdown": {
+                "investment_after_subsidy": C_inv.getValue(),
+                "operation": C_op.getValue(),
+                "operation_before_operational_policy": C_op_before_policy.getValue(),
+                "carbon": C_carbon.getValue(),
+                "investment_before_subsidy": raw_inv_value,
+            },
+            "expected_total_emissions": expected_total_emissions,
+            "expected_dyc_emissions": 0.001 * p["e1"] * expected_dyc_work,
+            "expected_eyc_emissions": 0.001 * p["e2"] * expected_eyc_work,
+            "expected_excess_emissions": expected_excess_emissions,
+            "expected_total_work": expected_total_work,
+            "expected_dyc_work": expected_dyc_work,
+            "expected_eyc_work": expected_eyc_work,
+            "expected_eyc_work_share": expected_eyc_work / expected_total_work if expected_total_work else 0.0,
+            "expected_dyc_work_share": expected_dyc_work / expected_total_work if expected_total_work else 0.0,
+            "government_subsidy": p["k"] * raw_inv_value,
+            "investment_subsidy": p["k"] * raw_inv_value,
+            "operation_subsidy": operation_subsidy_value,
+            "total_policy_cost": p["k"] * raw_inv_value + operation_subsidy_value,
+        }
     return float("inf"), model.Runtime, {"status": model.status, "mip_gap": None}

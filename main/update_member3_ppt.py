@@ -28,8 +28,11 @@ LIGHT_BLUE = RGBColor(232, 239, 248)
 MEMBER3_TITLES = {
     "五、数值实验与政策仿真",
     "实验设计与评价指标",
+    "真实规模算例与算法效率",
     "需求不确定性影响",
     "补贴灵敏度分析",
+    "运营端政策灵敏度",
+    "政策组合验证",
     "CV扩展与管理洞察",
     "管理洞察与政策建议",
 }
@@ -127,6 +130,23 @@ def add_metric_row(slide, top, metrics):
                     value, font_size=16, color=color, bold=True, align=PP_ALIGN.CENTER)
 
 
+def add_metric_row_custom(slide, top, metrics, start_left=0.72, card_width=1.76, gap=0.14,
+                          label_size=9.5, value_size=15):
+    start_left = Inches(start_left)
+    gap = Inches(gap)
+    width = Inches(card_width)
+    for i, (label, value, color) in enumerate(metrics):
+        left = start_left + i * (width + gap)
+        shape = slide.shapes.add_shape(1, left, top, width, Inches(0.72))
+        shape.fill.solid()
+        shape.fill.fore_color.rgb = LIGHT_BLUE
+        shape.line.color.rgb = RGBColor(205, 216, 230)
+        add_textbox(slide, left + Inches(0.10), top + Inches(0.10), width - Inches(0.20), Inches(0.20),
+                    label, font_size=label_size, color=MUTED, bold=False, align=PP_ALIGN.CENTER)
+        add_textbox(slide, left + Inches(0.10), top + Inches(0.32), width - Inches(0.20), Inches(0.28),
+                    value, font_size=value_size, color=color, bold=True, align=PP_ALIGN.CENTER)
+
+
 def remove_slide(prs, index):
     slide_id = prs.slides._sldIdLst[index]
     r_id = slide_id.rId
@@ -152,23 +172,45 @@ def add_member3_slides(prs):
     slide = prs.slides.add_slide(content_layout)
     set_template_title(slide, "实验设计与评价指标")
     remove_content_placeholder(slide)
-    add_subtitle(slide, "围绕随机规划解的投资响应与政策敏感性展开")
-    add_bullets(slide, Inches(0.72), Inches(1.18), Inches(5.2), Inches(2.05), [
-        "实验一：比较随机规划 DEP 与均值模型 EV，评估需求波动是否促使企业预留更多 EYC。",
-        "实验二：改变补贴比例 k，观察企业成本、政府预算、改造区域数与总排放的响应。",
-        "实验三：设置不同需求波动水平 CV，分析补贴边际效用是否随不确定性增强而变化。",
-    ], font_size=16)
+    add_subtitle(slide, "从模型价值、真实规模可扩展性到政策组合有效性逐层验证")
+    add_bullets(slide, Inches(0.72), Inches(1.14), Inches(5.45), Inches(2.55), [
+        "实验一：比较随机规划 DEP 与均值模型 EV，验证需求波动是否会推高 EYC 缓冲投资。",
+        "实验二：构造中国大型港口规模算例，比较 Gurobi、代表情景法、列生成、场景分解和启发式算法。",
+        "实验三：在真实规模算例上同时改变补贴 k 与碳交易价格，量化运营端政策影响。",
+        "实验四：验证补贴、碳价、配额递减和绩效补贴的组合是否优于单一政策。",
+    ], font_size=13.5)
     add_metric_row(slide, Inches(3.72), [
         ("核心对比", "DEP vs EV", BLUE),
-        ("补贴网格", "k=0~1", ACCENT),
-        ("波动水平", "CV=0.05/0.15/0.30", RGBColor(62, 138, 94)),
-        ("主算例", "3区×24期×20场景", RGBColor(124, 90, 166)),
+        ("真实规模", "12区×60期×60场景", ACCENT),
+        ("运营政策", "k×碳价", RGBColor(62, 138, 94)),
+        ("政策验证", "组合优于单一", RGBColor(124, 90, 166)),
     ])
     add_bullets(slide, Inches(6.28), Inches(1.28), Inches(2.35), Inches(2.25), [
-        "评价指标：EYC 投入、VSS、期望总排放、政府补贴支出。",
-        "所有实验使用 Gurobi 直接求解确定性等价模型。",
-        "图表展示全网格趋势，表格保留关键节点。",
-    ], font_size=12.8)
+        "评价指标：VSS、EYC 投入、求解时间、目标差距、EYC 作业占比、减排率。",
+        "Gurobi 作为基准，代表情景法用于批量政策仿真。",
+        "新增实验直接回应规模、运营端和管理建议验证三点反馈。",
+    ], font_size=11.8)
+    new_slides.append(slide)
+
+    slide = prs.slides.add_slide(content_layout)
+    set_template_title(slide, "真实规模算例与算法效率")
+    remove_content_placeholder(slide)
+    add_subtitle(slide, "以上海洋山四期 630万TEU/年口径构造 12区×60期×60场景算例")
+    slide.shapes.add_picture(str(IMG_DIR / "member3_china_scale_case.png"),
+                             Inches(0.70), Inches(1.16), width=Inches(5.92))
+    add_bullets(slide, Inches(6.78), Inches(1.25), Inches(2.05), Inches(2.90), [
+        "完整 DEP：652200 个变量、263568 个约束。",
+        "Gurobi 完整基准约 9.04s。",
+        "代表情景12 用 2.47s 达到同一目标值。",
+        "EV、启发式、场景分解约有 0.67% 目标差距。",
+        "批量政策仿真采用代表情景法，Gurobi 保留为校验基准。",
+    ], font_size=11.5)
+    add_metric_row_custom(slide, Inches(4.20), [
+        ("完整规模", "12×60×60", BLUE),
+        ("Gurobi变量", "65.22万", BLUE),
+        ("最快高质量", "2.47s", ACCENT),
+        ("目标差距", "0.00%", RGBColor(62, 138, 94)),
+    ], card_width=1.78, value_size=15)
     new_slides.append(slide)
 
     slide = prs.slides.add_slide(content_layout)
@@ -194,7 +236,7 @@ def add_member3_slides(prs):
     slide = prs.slides.add_slide(content_layout)
     set_template_title(slide, "补贴灵敏度分析")
     remove_content_placeholder(slide)
-    add_subtitle(slide, "中规模实例：k=0,0.1,...,1.0")
+    add_subtitle(slide, "中规模实例：k=0,0.1,...,1.0，说明单一投资补贴的局限")
     slide.shapes.add_picture(str(IMG_DIR / "member3_subsidy_sensitivity.png"),
                              Inches(0.70), Inches(1.12), width=Inches(5.95))
     add_bullets(slide, Inches(6.82), Inches(1.28), Inches(2.05), Inches(3.15), [
@@ -204,6 +246,42 @@ def add_member3_slides(prs):
         "k=1.0 时 EYC 投入小幅上升到 17.20 台。",
         "按 0.5% 减排标准，当前参数下未形成显著政策临界点。",
     ], font_size=11.6)
+    new_slides.append(slide)
+
+    slide = prs.slides.add_slide(content_layout)
+    set_template_title(slide, "运营端政策灵敏度")
+    remove_content_placeholder(slide)
+    add_subtitle(slide, "真实规模算例：投资补贴 k 与碳交易价格协同影响 EYC 作业占比")
+    slide.shapes.add_picture(str(IMG_DIR / "member3_operational_policy_sensitivity.png"),
+                             Inches(0.68), Inches(1.13), width=Inches(5.98))
+    add_bullets(slide, Inches(6.80), Inches(1.25), Inches(2.05), Inches(3.10), [
+        "结论：运营端碳价只有与投资补贴配合，才明显改变作业结构。",
+        "k=0 时，碳价升至 600 仍未触发 EYC 投入。",
+        "k=0.5 且碳价=300 时，EYC 作业占比升至 11.70%。",
+        "k=0.5 且碳价=600 时，总排放降至 96556.0 吨。",
+        "k=1.0 可强推电动化，但财政成本显著更高。",
+    ], font_size=11.3)
+    new_slides.append(slide)
+
+    slide = prs.slides.add_slide(content_layout)
+    set_template_title(slide, "政策组合验证")
+    remove_content_placeholder(slide)
+    add_subtitle(slide, "验证管理建议：补贴、碳价、配额递减与绩效补贴组合使用")
+    slide.shapes.add_picture(str(IMG_DIR / "member3_policy_package_validation.png"),
+                             Inches(0.70), Inches(1.15), width=Inches(5.92))
+    add_bullets(slide, Inches(6.78), Inches(1.24), Inches(2.08), Inches(3.08), [
+        "单一投资补贴或单一碳价：减排率均为 0。",
+        "补贴+碳价：减排 6.58%，EYC 作业占比 11.70%。",
+        "补贴+碳价+配额递减：减排 6.83%。",
+        "加入绩效型补贴后，减排率提高到 8.93%。",
+        "政策组合能把投资激励传导到实际运营替代。",
+    ], font_size=11.4)
+    add_metric_row_custom(slide, Inches(4.24), [
+        ("组合减排", "6.58%", BLUE),
+        ("配额递减", "6.83%", BLUE),
+        ("绩效补贴", "8.93%", ACCENT),
+        ("EYC占比", "15.88%", RGBColor(62, 138, 94)),
+    ], card_width=1.78, value_size=15)
     new_slides.append(slide)
 
     slide = prs.slides.add_slide(content_layout)
@@ -233,17 +311,17 @@ def add_member3_slides(prs):
 
     add_bullets(slide, Inches(0.72), Inches(1.18), Inches(3.95), Inches(3.25), [
         "企业视角：需求波动越强，越需要把 EYC 作为高峰风险缓冲，而不是只按平均需求配置。",
-        "政府视角：投资补贴能降低企业成本，但若电动化已具备经济性，继续提高补贴的边际减排有限。",
-        "政策设计：补贴应与运营侧约束联动，例如 EYC 作业占比、实际减排吨数、碳价或免费配额递减。",
+        "政府视角：投资补贴能降低门槛，但单一补贴或单一碳价都可能无法触发运营减排。",
+        "政策设计：补贴、碳价、配额递减和绩效补贴需要组合使用，使财政激励绑定实际 EYC 作业替代。",
     ], font_size=13.5)
 
     add_textbox(slide, Inches(5.12), Inches(1.22), Inches(3.55), Inches(0.32),
                 "政策工具的作用边界", font_size=15, color=BLUE, bold=True)
     policy_rows = [
-        ("投资补贴 k", "降低前期成本", "对已改造区域边际减排弱"),
-        ("碳交易价格", "提高DYC作业成本", "直接影响运营排放结构"),
-        ("配额递减", "压缩高排放空间", "推动持续减排"),
-        ("绩效型补贴", "绑定实际减排", "避免只补贴存量投资"),
+        ("投资补贴 k", "降低前期成本", "单独使用可能不减排"),
+        ("碳交易价格", "提高DYC作业成本", "需跨过投资门槛"),
+        ("配额递减", "压缩高排放空间", "强化持续减排压力"),
+        ("绩效型补贴", "绑定EYC作业量", "减排率提高到8.93%"),
     ]
     top = Inches(1.72)
     row_h = Inches(0.58)
@@ -263,9 +341,9 @@ def add_member3_slides(prs):
 
     add_metric_row(slide, Inches(4.38), [
         ("核心发现", "随机规划更稳健", BLUE),
-        ("补贴定位", "成本分担", ACCENT),
+        ("规模验证", "65.22万变量", ACCENT),
         ("减排关键", "运营替代", RGBColor(62, 138, 94)),
-        ("建议", "政策组合", RGBColor(124, 90, 166)),
+        ("最优方向", "政策组合", RGBColor(124, 90, 166)),
     ])
     new_slides.append(slide)
 
